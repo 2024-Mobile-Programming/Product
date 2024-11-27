@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- rating bar custom -->
+    <style name="ratingBar" parent="Theme.AppCompat">
+        <item name="android:minHeight">10dp</item> <!-- 최소 높이 -->
+        <item name="android:maxHeight">20dp</item>
+
+        <!-- 별의 채워진 부분 -->
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/ratingBar</item>
+
+    </style>
+
+</resources>
