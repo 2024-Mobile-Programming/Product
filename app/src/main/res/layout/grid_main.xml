@@ -41,8 +41,10 @@
         android:id="@+id/recyclerViewGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
         android:padding="8dp"
         tools:listitem="@layout/item_grid_layout" />
+
 
     <!-- 고정된 버튼 -->
     <Button
@@ -52,5 +54,5 @@
         android:text="추가하기"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="50dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
