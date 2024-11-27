@@ -29,17 +29,6 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        gridButton = (ImageButton) findViewById(R.id.toGridButton);
-
-        // 아이콘 클릭 시 화면 전환
-        gridButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GridMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         // RecyclerView 참조
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // 레이아웃 설정 (세로 리스트)
@@ -57,6 +46,18 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         // 어댑터 설정
         ItemAdapter adapter = new ItemAdapter(itemList, this);
         recyclerView.setAdapter(adapter);
+
+        // 그리드뷰로 전환
+        gridButton = (ImageButton) findViewById(R.id.toGridButton);
+
+        // 아이콘 클릭 시 화면 전환
+        gridButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), GridMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
