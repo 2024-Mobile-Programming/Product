@@ -14,9 +14,15 @@ import java.util.List;
 
 public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.GridItemViewHolder> {
     private final List<Item> itemList;
+    private final OnItemClickListener clickListener;
 
-    public GridItemAdapter(List<Item> itemList) {
+    public interface OnItemClickListener {
+        void onItemClick(Item item);
+    }
+
+    public GridItemAdapter(List<Item> itemList, OnItemClickListener clickListener) {
         this.itemList = itemList;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -32,11 +38,16 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.GridIt
         // 현재 위치의 데이터를 가져와 뷰에 바인딩
         Item currentItem = itemList.get(position);
         holder.itemTitle.setText(currentItem.getTitle());
-//        holder.itemContent.setText(currentItem.getContent());
-//        holder.itemAuthor.setText(currentItem.getAuthor());
-//        holder.itemDate.setText(currentItem.getDate());
-//        holder.itemRating.setRating(currentItem.getRating());
         holder.itemImage.setImageResource(currentItem.getImage());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clickListener != null) {
+                    clickListener.onItemClick(currentItem);
+                }
+            }
+        });
     }
 
     @Override

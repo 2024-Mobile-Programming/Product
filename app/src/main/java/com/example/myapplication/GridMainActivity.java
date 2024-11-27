@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridMainActivity extends AppCompatActivity {
+public class GridMainActivity extends AppCompatActivity implements GridItemAdapter.OnItemClickListener {
     ImageButton listButton;
 
     @Override
@@ -45,7 +46,7 @@ public class GridMainActivity extends AppCompatActivity {
         itemList.add(new Item("Inception", "A mind-bending thriller", null, "2024.11.23.", 0, 4.0f));
 
         // 어댑터 설정
-        GridItemAdapter adapter = new GridItemAdapter(itemList);
+        GridItemAdapter adapter = new GridItemAdapter(itemList, this);
         recyclerViewGrid.setAdapter(adapter);
 
         // 리스트뷰로 전환
@@ -57,5 +58,20 @@ public class GridMainActivity extends AppCompatActivity {
                 finish();
             }
         });
+       }
+
+    @Override
+    public void onItemClick(Item item){
+        Intent intent = new Intent(GridMainActivity.this, DetailActivity.class);
+        // Pass data to DetailActivity
+        intent.putExtra("title", item.getTitle());
+        intent.putExtra("content", item.getContent());
+        intent.putExtra("author", item.getAuthor());
+        intent.putExtra("date", item.getDate());
+        intent.putExtra("rating", item.getRating());
+        intent.putExtra("image", item.getImage());
+        // Add other data as needed
+        startActivity(intent);
+
     }
 }
