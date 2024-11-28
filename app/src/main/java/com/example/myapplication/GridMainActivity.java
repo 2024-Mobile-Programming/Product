@@ -38,12 +38,14 @@ public class GridMainActivity extends AppCompatActivity implements GridItemAdapt
         // 데이터 리스트 생성
         // item 추가 (하드 코딩)
         List<Item> itemList = new ArrayList<>();
+        /*
         itemList.add(new Item("Avatar", "An epic sci-fi movie", null, "2024.11.23.", 0, 4.5f));
         itemList.add(new Item("Harry Potter", "A magical journey", null, "2024.11.23.", 0, 3.5f));
         itemList.add(new Item("Inception", "A mind-bending thriller", null, "2024.11.23.", 0, 4.0f));
         itemList.add(new Item("Avatar", "An epic sci-fi movie", null, "2024.11.23.", 0, 4.5f));
         itemList.add(new Item("Harry Potter", "A magical journey", null, "2024.11.23.", 0, 3.5f));
         itemList.add(new Item("Inception", "A mind-bending thriller", null, "2024.11.23.", 0, 4.0f));
+         */
 
         // 어댑터 설정
         GridItemAdapter adapter = new GridItemAdapter(itemList, this);
@@ -63,15 +65,8 @@ public class GridMainActivity extends AppCompatActivity implements GridItemAdapt
     @Override
     public void onItemClick(Item item){
         Intent intent = new Intent(GridMainActivity.this, DetailActivity.class);
-        // Pass data to DetailActivity
-        intent.putExtra("title", item.getTitle());
-        intent.putExtra("content", item.getContent());
-        intent.putExtra("author", item.getAuthor());
-        intent.putExtra("date", item.getDate());
-        intent.putExtra("rating", item.getRating());
-        intent.putExtra("image", item.getImage());
-        // Add other data as needed
+        intent.putExtra("ITEM_ID", item.getId());
         startActivity(intent);
-
     }
+
 }

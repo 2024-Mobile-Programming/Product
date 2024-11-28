@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -35,10 +38,20 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.GridIt
 
     @Override
     public void onBindViewHolder(@NonNull GridItemViewHolder holder, int position) {
-        // 현재 위치의 데이터를 가져와 뷰에 바인딩
         Item currentItem = itemList.get(position);
         holder.itemTitle.setText(currentItem.getTitle());
-        holder.itemImage.setImageResource(currentItem.getImage());
+
+        // Glide를 사용하여 이미지 로드
+        if (currentItem.getThumbnail() != null && !currentItem.getThumbnail().isEmpty()) {
+            Uri imageUri = Uri.parse(currentItem.getThumbnail());
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUri)
+                    .placeholder(R.drawable.default_image) // 로딩 중 표시할 기본 이미지
+                    .error(R.drawable.default_image) // 로딩 실패 시 표시할 이미지
+                    .into(holder.itemImage);
+        } else {
+            holder.itemImage.setImageResource(R.drawable.default_image); // 기본 이미지 설정
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
