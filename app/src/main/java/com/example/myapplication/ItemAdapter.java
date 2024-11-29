@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item currentItem = itemList.get(position);
         holder.itemTitle.setText(currentItem.getTitle());
         holder.itemAuthor.setText(currentItem.getAuthor());
+        holder.itemRating.setRating(currentItem.getRating());
 
         holder.itemView.setOnClickListener(v -> {
             if (clickListener != null) {
@@ -55,11 +57,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     // ViewHolder class - View 정보 저장
     static class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView itemTitle, itemAuthor;
+        RatingBar itemRating;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemTitle = itemView.findViewById(R.id.itemTitle);
             itemAuthor = itemView.findViewById(R.id.itemAuthor);
+            itemRating = itemView.findViewById(R.id.itemRating);
         }
     }
 }
