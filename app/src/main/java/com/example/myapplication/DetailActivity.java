@@ -5,63 +5,69 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
-    EditText title, content, author, date;
-    ImageView thumbnail;
-    RatingBar ratingBar;
+    EditText titleEditText, authorEditText;
+    Button saveButton, deleteButton;
+    DatabaseHelper dbHelper;
+
+    long itemId = -1;
+    boolean isNewItem = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        title = findViewById(R.id.book_title);
-        content = findViewById(R.id.book_description);
-        author = findViewById(R.id.book_author);
-        date = findViewById(R.id.date);
-        ratingBar = findViewById(R.id.ratingBar1);
-        thumbnail = findViewById(R.id.book_image);
-        Button clearButton = findViewById(R.id.clearButton);
-        Button plusButton = findViewById(R.id.plusButton);
-        Button minusButton = findViewById(R.id.minusButton);
+        titleEditText = findViewById(R.id.book_title);
+        authorEditText = findViewById(R.id.book_author);
+        saveButton = findViewById(R.id.saveButton);
+        deleteButton = findViewById(R.id.deleteButton);
+
+        dbHelper = new DatabaseHelper(this);
 
         Intent intent = getIntent();
-        title.setText(intent.getStringExtra("title"));
-        content.setText(intent.getStringExtra("content"));
-        author.setText(intent.getStringExtra("author"));
-        date.setText(intent.getStringExtra("date"));
-        ratingBar.setRating(intent.getFloatExtra("rating", 0.0f));
-        thumbnail.setImageResource(intent.getIntExtra("thumbnail", 0));
+        isNewItem = intent.getBooleanExtra("newItem", true);
 
-        //+버튼과 -버튼의 기능입니다. step size는 0.5로 했습니다.
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ratingBar.setRating(ratingBar.getRating()+ratingBar.getStepSize());
-            }
-        });
-        minusButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ratingBar.setRating(ratingBar.getRating()-ratingBar.getStepSize());
-            }
-        });
+        if (!isNewItem) {
+            // 기존 데이터 수정
+            itemId = intent.getLongExtra("id", -1);
 
+            String title = intent.getStringExtra("title");
+            String author = intent.getStringExtra("author");
+
+            titleEditText.setText(title);
+            authorEditText.setText(author);
+        } else {
+            // 데이터 추가 - 삭제 버튼 숨김
+            deleteButton.setVisibility(View.GONE);
+        }
+
+        // 저장 버튼
+        saveButton.setOnClickListener(v -> {
+            String newTitle = titleEditText.getText().toString().trim();
+            String newAuthor = authorEditText.getText().toString().trim();
+
+            if (!isNewItem) {
+                // 존재하던 item - db update
+                Item updatedItem = new Item(newTitle, newAuthor);
+                updatedItem.setId(itemId);
+                dbHelper.updateItem(itemId, updatedItem);
+            } else {
+                // 새로운 item - db insert
+                Item newItem = new Item(newTitle, newAuthor);
+                dbHelper.insertItem(newItem);
+            }
+            finish(); 
+        });
 
         // 삭제 버튼
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // EditText 내용 지우기
-                title.setText("");
-                content.setText("");
-                author.setText("");
-                date.setText("");
+        deleteButton.setOnClickListener(v -> {
+            if (!isNewItem && itemId != -1) {
+                dbHelper.deleteItem(itemId);
             }
+            finish();
         });
     }
 }
