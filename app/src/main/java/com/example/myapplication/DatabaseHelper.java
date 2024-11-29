@@ -21,12 +21,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_AUTHOR = "author";
+    private static final String COLUMN_DATE = "date";
+    private static final String COLUMN_RATING = "rating";
+    private static final String COLUMN_CONTENT = "content";
 
     // table 생성 sql
     private static final String CREATE_TABLE_ITEMS = "CREATE TABLE " + TABLE_ITEMS + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_TITLE + " TEXT,"
-            + COLUMN_AUTHOR + " TEXT"
+            + COLUMN_AUTHOR + " TEXT,"
+            + COLUMN_DATE + " TEXT,"
+            + COLUMN_RATING + " REAL,"
+            + COLUMN_CONTENT + " TEXT"
             + ")";
 
     public DatabaseHelper(Context context) {
@@ -52,6 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, item.getTitle());
         values.put(COLUMN_AUTHOR, item.getAuthor());
+        values.put(COLUMN_DATE, item.getDate());
+        values.put(COLUMN_RATING, item.getRating());
+        values.put(COLUMN_CONTENT, item.getContent());
 
         long id = db.insert(TABLE_ITEMS, null, values);
         db.close();
@@ -72,8 +81,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE));
                 String author = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AUTHOR));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE));
+                float rating = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_RATING));
+                String content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT));
 
-                Item item = new Item(title, author);
+                Item item = new Item(title, author, date, rating, content);
                 item.setId(id);
                 items.add(item);
             } while (cursor.moveToNext());
@@ -91,6 +103,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, item.getTitle());
         values.put(COLUMN_AUTHOR, item.getAuthor());
+        values.put(COLUMN_DATE, item.getDate());
+        values.put(COLUMN_RATING, item.getRating());
+        values.put(COLUMN_CONTENT, item.getContent());
 
         return db.update(TABLE_ITEMS, values, COLUMN_ID + " = ?",
                 new String[]{String.valueOf(id)});
