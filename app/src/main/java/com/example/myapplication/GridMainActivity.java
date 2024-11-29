@@ -69,6 +69,7 @@ public class GridMainActivity extends AppCompatActivity implements GridItemAdapt
         intent.putExtra("date", item.getDate());
         intent.putExtra("rating", item.getRating());
         intent.putExtra("content", item.getContent());
+        intent.putExtra("imageUri", item.getImageUri());
         intent.putExtra("newItem", false);
         startActivity(intent);
     }

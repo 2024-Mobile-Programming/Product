@@ -7,13 +7,15 @@ public class Item {
     private String date;
     private float rating;
     private String content;
+    private String imageUri;
 
-    public Item(String title, String author, String date, float rating, String content) {
+    public Item(String title, String author, String date, float rating, String content, String imageUri) {
         this.title = title;
         this.author = author;
         this.date = date;
         this.rating = rating;
         this.content = content;
+        this.imageUri = imageUri;
     }
 
     public long getId() {
@@ -62,5 +64,13 @@ public class Item {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 }

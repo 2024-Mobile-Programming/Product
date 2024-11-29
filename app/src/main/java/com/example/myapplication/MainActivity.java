@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         intent.putExtra("date", item.getDate());
         intent.putExtra("rating", item.getRating());
         intent.putExtra("content", item.getContent());
+        intent.putExtra("imageUri", item.getImageUri());
         intent.putExtra("newItem", false);
         startActivity(intent);
     }

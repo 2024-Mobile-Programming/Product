@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     // DB 정보
     private static final String DATABASE_NAME = "reviews.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // table 이름
     private static final String TABLE_ITEMS = "items";
@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DATE = "date";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_CONTENT = "content";
+    private static final String COLUMN_IMAGE_URI = "imageUri";
 
     // table 생성 sql
     private static final String CREATE_TABLE_ITEMS = "CREATE TABLE " + TABLE_ITEMS + "("
@@ -32,7 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_AUTHOR + " TEXT,"
             + COLUMN_DATE + " TEXT,"
             + COLUMN_RATING + " REAL,"
-            + COLUMN_CONTENT + " TEXT"
+            + COLUMN_CONTENT + " TEXT,"
+            + COLUMN_IMAGE_URI + " TEXT"
             + ")";
 
     public DatabaseHelper(Context context) {
@@ -61,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_DATE, item.getDate());
         values.put(COLUMN_RATING, item.getRating());
         values.put(COLUMN_CONTENT, item.getContent());
+        values.put(COLUMN_IMAGE_URI, item.getImageUri());
 
         long id = db.insert(TABLE_ITEMS, null, values);
         db.close();
@@ -84,8 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE));
                 float rating = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_RATING));
                 String content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT));
+                String imageUri = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_URI));
 
-                Item item = new Item(title, author, date, rating, content);
+                Item item = new Item(title, author, date, rating, content, imageUri);
                 item.setId(id);
                 items.add(item);
             } while (cursor.moveToNext());
@@ -106,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_DATE, item.getDate());
         values.put(COLUMN_RATING, item.getRating());
         values.put(COLUMN_CONTENT, item.getContent());
+        values.put(COLUMN_IMAGE_URI, item.getImageUri());
 
         return db.update(TABLE_ITEMS, values, COLUMN_ID + " = ?",
                 new String[]{String.valueOf(id)});
