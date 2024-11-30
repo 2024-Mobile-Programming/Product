@@ -39,10 +39,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        titleEditText = findViewById(R.id.book_title);
-        authorEditText = findViewById(R.id.book_author);
+        titleEditText = findViewById(R.id.title);
+        authorEditText = findViewById(R.id.author);
         dateEditText = findViewById(R.id.date);
-        contentEditText = findViewById(R.id.book_description);
+        contentEditText = findViewById(R.id.content);
         ratingBar = findViewById(R.id.ratingBar1);
         thumbnail = findViewById(R.id.thumbnail);
         selectImageButton = findViewById(R.id.selectImageButton);
@@ -61,8 +61,8 @@ public class DetailActivity extends AppCompatActivity {
                             // Glide를 사용하여 이미지 로드
                             Glide.with(this)
                                     .load(selectedImageUri)
-                                    .placeholder(R.drawable.default_image) // 로딩 전 표시할 이미지
-                                    .error(R.drawable.default_image) // 로딩 실패 시 표시할 이미지
+                                    .placeholder(R.drawable.ic_launcher_foreground) // 로딩 전 표시할 이미지
+                                    .error(R.drawable.ic_launcher_foreground) // 로딩 실패 시 표시할 이미지
                                     .into(thumbnail);
                         }
                     }
@@ -102,8 +102,8 @@ public class DetailActivity extends AppCompatActivity {
                 Uri imageUri = Uri.parse(imageUriString);
                 Glide.with(this)
                         .load(imageUri)
-                        .placeholder(R.drawable.default_image)
-                        .error(R.drawable.default_image)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_foreground)
                         .into(thumbnail);
             }
         } else {

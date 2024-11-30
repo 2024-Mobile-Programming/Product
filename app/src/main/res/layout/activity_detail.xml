@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="4dp">
 
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="120dp"
-        android:layout_height="160dp"
+        android:layout_height="120dp"
+        android:backgroundTint="#cccccccc"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_launcher_foreground"
+        android:background="@drawable/item_border"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -17,8 +21,10 @@
         android:id="@+id/selectImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_shadow_end_color"
         android:text="이미지 선택"
-        app:layout_constraintBottom_toBottomOf="@id/thumbnail" />
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/thumbnail" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -30,53 +36,60 @@
         app:layout_constraintStart_toEndOf="@id/thumbnail"
         app:layout_constraintTop_toTopOf="@id/thumbnail">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
         <!-- 제목 -->
-        <TextView
+            <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="제목"
-            android:textSize="16sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="제목"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/book_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
 
-        <!-- 저자 -->
-        <TextView
+            <!-- 저자 -->
+            <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="저자"
-            android:textSize="16sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="저자"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/book_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
 
-        <!-- 날짜 -->
-        <TextView
+            <!-- 날짜 -->
+            <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="날짜"
-            android:layout_marginTop="4dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날짜"
+                android:layout_marginTop="4dp" />
 
-        <EditText
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="YYYY-MM-DD"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="YYYY-MM-DD"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <RatingBar
             android:id="@+id/ratingBar1"
+            android:theme="@style/ratingBar"
             style="?android:attr/ratingBarStyleIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@id/thumbnail" />
 
     <EditText
-        android:id="@+id/book_description"
+        android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -117,6 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="삭제"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="@color/black"
         android:backgroundTint="@color/cardview_shadow_end_color"/>
@@ -128,9 +142,7 @@
         android:layout_margin="16dp"
         android:layout_marginEnd="120dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/cardview_shadow_end_color"
         android:text="저장"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

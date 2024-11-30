@@ -46,18 +46,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.itemTitle.setText(currentItem.getTitle());
         holder.itemAuthor.setText(currentItem.getAuthor());
         holder.itemRating.setRating(currentItem.getRating());
+        holder.itemContent.setText(currentItem.getContent());
+        holder.itemDate.setText(currentItem.getDate());
 
         // Glide를 사용하여 이미지 로드
         if (currentItem.getImageUri() != null && !currentItem.getImageUri().isEmpty()) {
             Uri imageUri = Uri.parse(currentItem.getImageUri());
             Glide.with(holder.itemView.getContext())
                     .load(imageUri)
-                    .placeholder(R.drawable.default_image) // 이미지 로딩 전 표시할 이미지
-                    .error(R.drawable.default_image) // 로딩 실패 시 표시할 이미지
+                    .placeholder(R.drawable.ic_launcher_foreground) // 이미지 로딩 전 표시할 이미지
+                    .error(R.drawable.ic_launcher_foreground) // 로딩 실패 시 표시할 이미지
                     .into(holder.itemImage);
         } else {
             // 이미지가 없는 경우 기본 이미지 표시
-            holder.itemImage.setImageResource(R.drawable.default_image);
+            holder.itemImage.setImageResource(R.drawable.ic_launcher_foreground);
         }
 
         holder.itemView.setOnClickListener(v -> {
@@ -74,7 +76,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     // ViewHolder class - View 정보 저장
     static class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView itemTitle, itemAuthor;
+        TextView itemTitle, itemAuthor, itemContent, itemDate;
         RatingBar itemRating;
         ImageView itemImage;
 
@@ -82,8 +84,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             super(itemView);
             itemTitle = itemView.findViewById(R.id.itemTitle);
             itemAuthor = itemView.findViewById(R.id.itemAuthor);
+            itemContent = itemView.findViewById(R.id.itemContent);
             itemRating = itemView.findViewById(R.id.itemRating);
             itemImage = itemView.findViewById(R.id.itemImage);
+            itemDate = itemView.findViewById(R.id.itemDate);
         }
     }
 }
