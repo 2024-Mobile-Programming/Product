@@ -43,7 +43,6 @@ public class GridMainActivity extends AppCompatActivity implements GridItemAdapt
         listButton.setOnClickListener(view -> {
             Intent intent = new Intent(GridMainActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
         });
 
         // 추가하기 버튼
