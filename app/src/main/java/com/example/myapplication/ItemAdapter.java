@@ -52,12 +52,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             Uri imageUri = Uri.parse(currentItem.getImageUri());
             Glide.with(holder.itemView.getContext())
                     .load(imageUri)
-                    .placeholder(R.drawable.default_image) // 이미지 로딩 전 표시할 이미지
-                    .error(R.drawable.default_image) // 로딩 실패 시 표시할 이미지
+                    .placeholder(R.drawable.ic_launcher_foreground) // 이미지 로딩 전 표시할 이미지
+                    .error(R.drawable.ic_launcher_foreground) // 로딩 실패 시 표시할 이미지
                     .into(holder.itemImage);
         } else {
             // 이미지가 없는 경우 기본 이미지 표시
-            holder.itemImage.setImageResource(R.drawable.default_image);
+            holder.itemImage.setImageResource(R.drawable.ic_launcher_foreground);
         }
 
         holder.itemView.setOnClickListener(v -> {
