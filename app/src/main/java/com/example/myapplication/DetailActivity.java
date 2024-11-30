@@ -39,10 +39,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        titleEditText = findViewById(R.id.book_title);
-        authorEditText = findViewById(R.id.book_author);
+        titleEditText = findViewById(R.id.title);
+        authorEditText = findViewById(R.id.author);
         dateEditText = findViewById(R.id.date);
-        contentEditText = findViewById(R.id.book_description);
+        contentEditText = findViewById(R.id.content);
         ratingBar = findViewById(R.id.ratingBar1);
         thumbnail = findViewById(R.id.thumbnail);
         selectImageButton = findViewById(R.id.selectImageButton);
