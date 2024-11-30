@@ -40,11 +40,15 @@ public class GridMainActivity extends AppCompatActivity implements GridItemAdapt
 
         // List View 전환
         listButton = findViewById(R.id.toListButton);
-        listButton.setOnClickListener(view -> finish());
+        listButton.setOnClickListener(view -> {
+            Intent intent = new Intent(GridMainActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         // 추가하기 버튼
         floatingButton = findViewById(R.id.floatingButton);
-        floatingButton.setOnClickListener(v -> {
+        floatingButton.setOnClickListener(view -> {
             Intent intent = new Intent(GridMainActivity.this, DetailActivity.class);
             intent.putExtra("newItem", true);
             startActivity(intent);

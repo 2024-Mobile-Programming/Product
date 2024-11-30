@@ -39,10 +39,7 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
 
         // Grid 전환
         gridButton = findViewById(R.id.toGridButton);
-        gridButton.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), GridMainActivity.class);
-            startActivity(intent);
-        });
+        gridButton.setOnClickListener(view -> finish());
 
         // 추가하기 버튼
         addBtn = findViewById(R.id.floatingButton);
